@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Form, Label, Input, Button } from './ContactEditor.styled';
 import { addContact } from 'redux/contacts/operations';
