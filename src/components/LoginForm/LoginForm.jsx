@@ -1,7 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
+import { nanoid } from 'nanoid';
+import { Form, Label, Input, Button } from './LoginForm.styled';
 
 export const LoginForm = () => {
+  const emailId = nanoid();
+  const passwordId = nanoid();
+
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -19,18 +24,14 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <label>
-        Email
-        <input type="email" name="email" />
-      </label>
+    <Form onSubmit={handleSubmit} autoComplete="off">
+      <Label htmlFor={emailId}>Email</Label>
+      <Input type="email" name="email" id={emailId} />
 
-      <label>
-        Password
-        <input type="password" name="password" />
-      </label>
+      <Label htmlFor={passwordId}>Password</Label>
+      <Input type="password" name="password" id={passwordId} />
 
-      <button type="submit">Register</button>
-    </form>
+      <Button type="submit">Login</Button>
+    </Form>
   );
 };

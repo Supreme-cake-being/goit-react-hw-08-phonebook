@@ -20,8 +20,8 @@ const ContactsList = () => {
 
   return (
     <>
-      {error && <p>{error}</p>}
-      {shouldShowContacts && (
+      {/* {error && <p>{error}</p>} */}
+      {shouldShowContacts ? (
         <List>
           <h1>Your Contacts</h1>
           <Filter />
@@ -30,6 +30,8 @@ const ContactsList = () => {
               <Contact key={id} id={id} name={name} number={number} />
             ))}
         </List>
+      ) : (
+        error && <p>{error}</p>
       )}
       {!shouldShowEmptyContactsMessage && (
         <EmptyContacts>There are no contacts :(</EmptyContacts>
