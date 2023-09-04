@@ -11,18 +11,20 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { contactsReducer } from './contactsSlice';
-import { filterReducer } from './filterSlice';
+import { contactsReducer } from 'redux/contacts/slice';
+import { filterReducer } from 'redux/filter/slice';
+import { authReducer } from 'redux/auth/slice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['filter'],
+  blacklist: [`filter`, `contacts`],
 };
 
 const reducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
+  auth: authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

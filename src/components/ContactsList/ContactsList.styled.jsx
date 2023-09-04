@@ -1,5 +1,14 @@
 import styled from '@emotion/styled';
 
+const List = styled.ul`
+  margin-top: 24px;
+  padding: 0 200px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
 const Item = styled.li`
   padding-bottom: 16px;
 
@@ -32,4 +41,11 @@ const Button = styled.button`
   }
 `;
 
-export { Item, Button };
+const EmptyContacts = styled.p`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export { List, Item, Button, EmptyContacts };

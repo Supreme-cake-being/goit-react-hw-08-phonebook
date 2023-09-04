@@ -1,25 +1,23 @@
 import styled from '@emotion/styled';
 
-const FormBox = styled.form`
-  margin-bottom: 28px;
+const Form = styled.form`
+  margin-top: 28px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 `;
 
 const Label = styled.label`
-  margin-bottom: 24px;
-
-  display: block;
-
   font-size: 20px;
   line-height: 24px;
 `;
 
 const Input = styled.input`
-  margin-bottom: 24px;
   padding-top: 16px;
   padding-bottom: 16px;
   padding-left: 16px;
-
-  display: block;
 
   font-size: 16px;
   line-height: 20px;
@@ -31,8 +29,6 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 8px 16px;
-
-  display: block;
 
   color: black;
   background-color: transparent;
@@ -48,4 +44,4 @@ const Button = styled.button`
   }
 `;
 
-export { FormBox, Label, Input, Button };
+export { Form, Label, Input, Button };

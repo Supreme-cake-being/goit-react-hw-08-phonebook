@@ -1,22 +1,29 @@
 import { nanoid } from 'nanoid';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { FormBox, Label, Input, Button } from './Form.styled';
-import { addContact } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
+import { Form, Label, Input, Button } from './ContactEditor.styled';
+import { addContact } from 'redux/contacts/operations';
+import { useContacts } from 'hooks/useContacts';
 
-const Form = () => {
+const ContactEditor = () => {
   const nameId = nanoid();
   const numberId = nanoid();
 
-  const contacts = useSelector(selectContacts);
+  const [isLoading, setIsLoading] = useState(false);
+  const { contacts } = useContacts();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [contacts]);
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const form = e.target;
 
+    setIsLoading(true);
     const isInContacts = contacts.find(
       ({ name }) => name.toLowerCase() === form.name.value.toLowerCase()
     );
@@ -35,7 +42,7 @@ const Form = () => {
   };
 
   return (
-    <FormBox onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Label htmlFor={nameId}>Name</Label>
       <Input
         type="text"
@@ -56,9 +63,9 @@ const Form = () => {
         id={numberId}
       />
 
-      <Button type="submit">Add contact</Button>
-    </FormBox>
+      <Button type="submit">{isLoading ? `Adding...` : `Add contact`}</Button>
+    </Form>
   );
 };
 
-export default Form;
+export default ContactEditor;
