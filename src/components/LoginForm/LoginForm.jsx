@@ -2,12 +2,14 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { nanoid } from 'nanoid';
 import { Form, Label, Input, Button } from './LoginForm.styled';
+import { useAuth } from 'hooks/useAuth';
 
 export const LoginForm = () => {
   const emailId = nanoid();
   const passwordId = nanoid();
 
   const dispatch = useDispatch();
+  const { logInError } = useAuth();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -20,7 +22,6 @@ export const LoginForm = () => {
         password: form.elements.password.value,
       })
     );
-    form.reset();
   };
 
   return (
@@ -31,6 +32,9 @@ export const LoginForm = () => {
       <Label htmlFor={passwordId}>Password</Label>
       <Input type="password" name="password" id={passwordId} />
 
+      {logInError && (
+        <p style={{ color: `red`, textAlign: `center` }}>{logInError}</p>
+      )}
       <Button type="submit">Login</Button>
     </Form>
   );

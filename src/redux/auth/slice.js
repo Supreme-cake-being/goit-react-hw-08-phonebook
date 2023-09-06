@@ -6,6 +6,8 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  signUpError: null,
+  logInError: null,
 };
 
 const authSlice = createSlice({
@@ -18,10 +20,22 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
+      .addCase(signUp.rejected, state => {
+        if (state.logInError) {
+          state.logInError = null;
+        }
+        state.signUpError = `This email is already in use.`;
+      })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      })
+      .addCase(logIn.rejected, state => {
+        if (state.signUpError) {
+          state.signUpError = null;
+        }
+        state.logInError = `That email and password combination is incorrect.`;
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
@@ -38,7 +52,14 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, state => {
         state.isRefreshing = false;
-      });
+      })
+      .addMatcher(
+        action => action.type.endsWith(`fulfilled`),
+        state => {
+          state.signUpError = null;
+          state.logInError = null;
+        }
+      );
   },
 });
 

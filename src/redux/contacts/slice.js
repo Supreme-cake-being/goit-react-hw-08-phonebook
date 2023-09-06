@@ -36,6 +36,12 @@ const contactsSlice = createSlice({
         (state, action) => {
           state.error = action.payload;
         }
+      )
+      .addMatcher(
+        action => action.type.endsWith(`fulfilled`),
+        state => {
+          state.error = null;
+        }
       );
   },
 });
