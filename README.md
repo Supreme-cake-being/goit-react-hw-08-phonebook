@@ -1,3 +1,3 @@
-# React phobebook project
+# React phonebook project
 
 
